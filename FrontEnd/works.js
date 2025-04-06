@@ -25,6 +25,10 @@ async function genererProjets (projets) {
         sectionProjet.appendChild(projet);
         projet.appendChild(imageElement);
         projet.appendChild(titleElement);
+
+        setTimeout(() => {
+            projet.classList.add("visible");
+        });
     }
 }
 
@@ -63,3 +67,31 @@ async function genererBoutonFiltres (categoriesFiltres) {
 
 genererProjets(works);
 genererBoutonFiltres(categories);
+
+async function activerFiltres () {
+
+    const boutonsFiltres = document.querySelectorAll(".filtres li");
+
+    boutonsFiltres.forEach(bouton => {
+        bouton.addEventListener('click', () => {
+            boutonsFiltres.forEach(b => b.classList.remove("active"));
+            bouton.classList.add("active");
+
+            const idCategory = parseInt(bouton.dataset.id);
+            let projetsFiltres;
+
+            if (idCategory === 0) {
+                projetsFiltres = works
+            } else {
+                projetsFiltres = works.filter(work => work.category.id === idCategory);
+            }
+
+            document.querySelector(".gallery").innerText = "";
+            genererProjets(projetsFiltres);
+        })
+    });
+}
+
+activerFiltres();
+
+

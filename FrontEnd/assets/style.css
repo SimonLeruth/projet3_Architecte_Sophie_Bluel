@@ -146,13 +146,25 @@ li:hover {
 
 .filtres ul li:hover {
 	color: white;
-	background-color: #1D6154
+	background-color: #1D6154;
+	cursor: pointer;
 }
 
 .filtres ul li.active {
 	background-color: #1D6154;
 	color: white;
 }
+
+.gallery article {
+	opacity: 0;
+	transform: translateY(10px);
+	transition: opacity 2s ease, transform 2s ease;
+  }
+  
+  .gallery article.visible {
+	opacity: 1;
+	transform: translateY(0);
+  }
 
 .gallery {
 	width: 100%;
