@@ -28,6 +28,7 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
@@ -98,6 +99,19 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+li a {
+	text-decoration: none;
+}
+
+nav li a:hover {
+	color: #B1663C;
+}
+
+li a:visited {
+	color: black;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -219,11 +233,22 @@ input[type="submit"]{
 	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
+	cursor: pointer;
 }
 
+#passwdForget {
+	text-align: center;
+	text-decoration: underline;
+	color: black;
+}
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
 
+#basDePage {
+	position: absolute;
+	bottom: 0;
+	right: 0;                   /* Autrement ? */
+}
