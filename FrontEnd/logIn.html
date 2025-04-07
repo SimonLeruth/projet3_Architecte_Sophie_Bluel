@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +9,7 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="./assets/style.css">
     <title>Identification</title>
+    <script type="module" src="login.js"></script>
 </head>
 <body>
     <header>
@@ -24,20 +25,21 @@
             </ul>
         </nav>
     </header>
-    <main>
+    <main id="main">
         <section id="contact">
             <h2>Log In</h2>
-            <form action="#" method="post">
+            <form action="#" method="post" class="formSeConnecter">
                 <label for="email">E-mail</label>
-                <input type="email" name="email" id="email">
+                <input type="email" name="email" id="email" required>
                 <label for="passwd">Mot de passe</label>
-                <input type="password" name="passwd" id="passwd">
+                <input type="password" name="passwd" id="passwd" required>
+                <p class="erreur-message" style="color:red; display:none"></p>
                 <input type="submit" value="Se connecter">
                 <a href="#" id="passwdForget">Mot de passe oublié</a> <!-- Possible ? -->
             </form>
         </section>
     </main>
-    <footer id="basDePage">
+    <footer>
         <nav>
             <ul>
                 <li>Mentions Légales</li>

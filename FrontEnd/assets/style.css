@@ -48,12 +48,25 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+html, body {
+	height: 100%;
+}
+
+
 body {
+	display: flex;
+	flex-direction: column;
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+#main {
+	margin-top: 80px;
+	height: 100vh;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -210,6 +223,10 @@ li a:visited {
 	flex-direction: column;
 }
 
+#contact form p {
+	padding-top: 15px;
+}
+
 #contact input {
 	height: 50px;
 	font-size: 1.2em;
@@ -245,10 +262,4 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
-}
-
-#basDePage {
-	position: absolute;
-	bottom: 0;
-	right: 0;                   /* Autrement ? */
 }
