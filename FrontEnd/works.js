@@ -1,9 +1,4 @@
-const reponseWorks = await fetch("http://localhost:5678/api/works");
-const works = await reponseWorks.json();
-const reponseCategories = await fetch("http://localhost:5678/api/categories");
-const categories = await reponseCategories.json();
-
-async function genererProjets (projets) {
+export async function genererProjets (projets) {
     
     // Récupération de l'élément du DOM qui accueillera les projets
     const sectionProjet = document.querySelector(".gallery");
@@ -26,13 +21,14 @@ async function genererProjets (projets) {
         projet.appendChild(imageElement);
         projet.appendChild(titleElement);
 
+        // On définit un minuteur qui exécute la fonction spécifiée une fois le minuteur expiré.
         setTimeout(() => {
             projet.classList.add("visible");
         });
     }
 }
 
-async function genererBoutonFiltres (categoriesFiltres) {
+export async function genererBoutonFiltres (categoriesFiltres) {
 
     // Récupération des deux elements du DOM pour pouvoir positionner des filtres a la bonne place sur la page.
     const sectionPortfolio = document.querySelector("#portfolio");
@@ -62,36 +58,39 @@ async function genererBoutonFiltres (categoriesFiltres) {
 
         ulFiltres.appendChild(filtre);
     }
+    // on insere a un endroit precis les boutons dans le HTML
     sectionPortfolio.insertBefore(navFiltres, divGallery);
 }
 
-genererProjets(works);
-genererBoutonFiltres(categories);
+export async function activerFiltres (works) {
 
-async function activerFiltres () {
-
+    // On recupere tous les boutons dans une seule variable
     const boutonsFiltres = document.querySelectorAll(".filtres li");
 
+    // On boucle sur les boutons afin d'y ajouter un evenement de type click
     boutonsFiltres.forEach(bouton => {
         bouton.addEventListener('click', () => {
+
+            // On retire la classe active de tous les boutons afin de mettre la classe sur l'evenement en question
             boutonsFiltres.forEach(b => b.classList.remove("active"));
             bouton.classList.add("active");
 
+            // on recupere l'id du bouton en question
             const idCategory = parseInt(bouton.dataset.id);
             let projetsFiltres;
 
+            // condition dans laquel si le bouton est le bouton "tous", on laisse tous les works au sinon on filtre les works en fonction de l'id de la categorie du work
             if (idCategory === 0) {
                 projetsFiltres = works
             } else {
                 projetsFiltres = works.filter(work => work.category.id === idCategory);
             }
 
+            // On vide la partie HTML et on refresh avec les works demandes
             document.querySelector(".gallery").innerText = "";
             genererProjets(projetsFiltres);
         })
     });
 }
-
-activerFiltres();
 
 
