@@ -48,23 +48,22 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
-html, body {
-	height: 100%;
+
+.topBar {
+	display: flex;
+	gap: 15px;
+	justify-content: center;
+	padding: 20px;
+	font-family: 'Work Sans';
+	color: white;
+	background-color: black;
 }
 
-
 body {
-	display: flex;
-	flex-direction: column;
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
-}
-
-#main {
-	margin-top: 80px;
-	height: 100vh;
 }
 
 header {
@@ -82,14 +81,13 @@ h1{
 	font-family: 'Syne';
 	font-size: 22px;
 	font-weight: 800;
-	color: #B1663C
+	color: #B1663C;
 }
 
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
 	letter-spacing: 0.1em;
-;
 }
 
 h2{
@@ -153,8 +151,27 @@ li a:visited {
 	margin-bottom: 1em;
 }
 
-.filtres ul {
+.edition {
 	display: flex;
+	gap: 10px;
+	justify-content: center;
+	margin-bottom: 80px;
+}
+
+.edition button {
+	display: flex;
+	gap: 5px;
+	align-items: center;
+	border: none;
+	background-color: white;
+	cursor: pointer;
+}
+
+.edition h2 {
+	margin:  0 !important;
+}
+
+.filtres ul {
 	justify-content: center;
 	gap: 20px;
 }

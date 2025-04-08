@@ -117,3 +117,36 @@ export function verifierConnexion() {
         })
     }
 }
+
+export function afficherModeEdition () {
+
+    if (token) {
+        const body = document.querySelector("body");
+        const html = document.querySelector("html");
+
+        const topBar = document.createElement("div");
+        topBar.classList.add("topBar")
+        topBar.innerHTML += '<i class="fa-regular fa-pen-to-square"></i><p>Mode édition</p>';
+
+        html.insertBefore(topBar, body);
+    }
+
+}
+
+export function afficherBoutonModifier () {
+
+    if (token) {
+        const h2 = document.querySelector("#portfolio h2");
+        const div = document.createElement("div");
+        div.classList.add("edition");
+        h2.parentNode.insertBefore(div, h2);
+        div.appendChild(h2);
+
+
+        const editionBouton = document.createElement("button");
+        editionBouton.innerHTML += '<i class="fa-regular fa-pen-to-square"></i><p>Modifier</p>';
+
+        div.appendChild(editionBouton);
+    }
+
+}

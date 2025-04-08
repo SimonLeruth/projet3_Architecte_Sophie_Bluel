@@ -1,4 +1,4 @@
-async function seConnecter () {
+function seConnecter () {
 
     // Recuperation du formulaire
     const form = document.querySelector(".formSeConnecter");
@@ -18,7 +18,7 @@ async function seConnecter () {
         // On envoie les donnees du formulaire a l'API qui nous renvoie un fichier JSON
         const reponse = await fetch('http://localhost:5678/api/users/login', {
             method: 'POST',
-            headers: {'content-Type':'application/json'},
+            headers: {'Content-Type':'application/json'},
             body: JSON.stringify(idConnexion)
         });
 

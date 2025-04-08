@@ -1,4 +1,4 @@
-import {genererProjets, genererBoutonFiltres, activerFiltres, verifierConnexion} from "./works.js";
+import {genererProjets, genererBoutonFiltres, activerFiltres, verifierConnexion, afficherModeEdition, afficherBoutonModifier} from "./works.js";
 
 const reponseWorks = await fetch("http://localhost:5678/api/works");
 const works = await reponseWorks.json();
@@ -9,3 +9,5 @@ genererProjets(works);
 genererBoutonFiltres(categories);
 activerFiltres(works);
 verifierConnexion();
+afficherModeEdition();
+afficherBoutonModifier();
