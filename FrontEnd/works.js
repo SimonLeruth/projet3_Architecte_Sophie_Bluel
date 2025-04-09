@@ -10,7 +10,7 @@ export async function genererProjets (projets) {
 
         // Création d’une balise dédiée à un projet
         const projet = document.createElement("article");
-        projet.dataset.id = projetElement.id
+        projet.dataset.id = projetElement.id;
 
         // Création des balises
         const imageElement = document.createElement("img");
@@ -139,14 +139,93 @@ export function afficherBoutonModifier () {
         const h2 = document.querySelector("#portfolio h2");
         const div = document.createElement("div");
         div.classList.add("edition");
-        h2.parentNode.insertBefore(div, h2);
+        h2.replaceWith(div);
         div.appendChild(h2);
 
 
-        const editionBouton = document.createElement("button");
+        const editionBouton = document.createElement("a");
+        editionBouton.classList.add("js-modale");
+        editionBouton.setAttribute('href', "#modale1");
         editionBouton.innerHTML += '<i class="fa-regular fa-pen-to-square"></i><p>Modifier</p>';
 
         div.appendChild(editionBouton);
     }
 
+}
+
+export function appelModale() {
+
+    let modale = null
+    const openModale = function (event) {
+        event.preventDefault();
+
+        const target = document.querySelector(event.currentTarget.getAttribute('href'));
+        target.style.display = null;
+        target.removeAttribute('aria-hidden');
+        target.setAttribute('aria-modal', true);
+
+        // Empeche le scroll sur le body
+        document.body.style.overflow = "hidden"
+
+        // Fermer la modale quand on clique sur le fond ou sur le bouton de fermeture
+        modale = target;
+        modale.addEventListener('click', closeModale);
+        modale.querySelector('.modale-close').addEventListener('click', closeModale);
+        modale.querySelector('.modale-stop').addEventListener('click', stopPropagation);
+    }
+
+    const closeModale = function (event) {
+        if (modale === null) return;
+        
+        event.preventDefault();
+
+        modale.style.display = "none";
+        modale.setAttribute('aria-hidden', true);
+        modale.removeAttribute('aria-modal');
+
+        // Réactiver le scroll sur le body
+        document.body.style.overflow = "auto"
+
+
+        modale.removeEventListener('click', closeModale);
+        modale.querySelector('.modale-close').removeEventListener('click', closeModale);
+        modale.querySelector('.modale-stop').removeEventListener('click', stopPropagation);
+        modale = null;
+    }
+
+    const stopPropagation = function (event) {
+        event.stopPropagation();
+    }
+
+    document.querySelector(".js-modale").addEventListener('click', openModale);
+
+    window.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' || event.key === 'Esc') {
+            closeModale(event);
+        }
+    })
+       
+}
+
+export function genererProjetModale(works) {
+    const projetsModale= document.querySelector(".photosGalerie");
+
+    for (let i = 0; i < works.length; i++) {
+        const projetElementModale = works[i];
+
+        // Création d’une balise dédiée à un projet
+        const projetModale = document.createElement("article");
+        projetModale.dataset.id = projetElementModale.id;
+
+        // Création des balises
+        const imageElementModale = document.createElement("img");
+        imageElementModale.src = projetElementModale.imageUrl;
+        const titreElementModale = document.createElement("p");
+        titreElementModale.innerText = projetElementModale.title;
+
+        // On rattache la balise article a la section photosGalerie
+        projetsModale.appendChild(projetModale);
+        projetModale.appendChild(imageElementModale);
+        projetModale.appendChild(titreElementModale);
+    }
 }
