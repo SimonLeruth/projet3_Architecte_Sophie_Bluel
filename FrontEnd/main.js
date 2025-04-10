@@ -1,5 +1,5 @@
 import {
-    genererProjets, genererBoutonFiltres, activerFiltres, connexion, 
+    genererProjets, genererBoutonFiltres, activerFiltres, gererConnexion, 
     afficherModeEdition, afficherBoutonModifier, appelModale,genererProjetModale,
     supprimerProjetModale
 } from "./works.js";
@@ -13,7 +13,7 @@ const token = localStorage.getItem("token");
 genererProjets(works);
 
 if (token) {
-    connexion();
+    gererConnexion();
     afficherModeEdition();
     afficherBoutonModifier();
     appelModale();

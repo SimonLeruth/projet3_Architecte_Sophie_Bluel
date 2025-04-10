@@ -94,7 +94,7 @@ export async function activerFiltres (works) {
     });
 }
 
-export function connexion() {
+export function gererConnexion() {
 
     // On recupere l'element ou doit changer le login/logout
     const loginLink = document.getElementById("loginLink");
@@ -220,7 +220,8 @@ export function genererProjetModale(works) {
 export function supprimerProjetModale() {
     const boutonsSuppProjet = document.querySelectorAll(".trash");
 
-    boutonsSuppProjet.forEach(bouton => bouton.addEventListener('click', async () => {
+    boutonsSuppProjet.forEach(bouton => bouton.addEventListener('click', async (event) => {
+        event.preventDefault();
         const projet = bouton.closest("article");
         const projetId = projet.dataset.id;
 
@@ -234,8 +235,14 @@ export function supprimerProjetModale() {
 
             if (reponse.ok) {
                 projet.remove();
+
+                const nouvelleReponse = await fetch("http://localhost:5678/api/works");
+                const nouveauxProjets = await nouvelleReponse.json();
+                document.querySelector(".gallery").innerHTML = "";
+                genererProjets(nouveauxProjets);
+                
             } else {
-                console.error("Erreur lors de la suppresion de l'element : ", reponse.status);
+                alert("Erreur lors de la suppresion de l'element : ", reponse.status);
             }
 
         } catch (err) {
