@@ -12,7 +12,6 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<script type="module" src="main.js" defer></script>
 </head>
 <body>
 <header>
@@ -70,15 +69,57 @@
 </footer>
 <aside id="modale1" class="modale" style="display:none" aria-hidden="true">
 	<div class="modale-wrapper modale-stop">
-		<a class="modale-close"><i class="fa-solid fa-xmark"></i></a>
-		<h2>Galerie photo</h2>
-		<div class="photosGalerie">
+		<div class="modale-supprimer-projet">
+			<div class="modale-close">
+				<a>
+					<i class="fa-solid fa-xmark"></i>
+				</a>
+			</div>
+			<h2>Galerie photo</h2>
+			<div class="photosGalerie">
 
+			</div>
+			<div class="divBouton">
+				<button class="btnAjtProjet">Ajouter une photo</button>
+			</div>
 		</div>
-		<div class="divBouton">
-			<button>Ajouter une photo</button>
+		<div class="form-ajout" style="display: none;">
+			<form>
+				<div class="icone-modale">
+					<a class="modale-retour"><i class="fa-solid fa-arrow-left"></i></a>
+					<a class="modale-close"><i class="fa-solid fa-xmark"></i></a>
+				</div>
+				<h2>Ajout photo</h2>
+				<div class="form-ajout-content">
+					<div class="upload-box">
+						<div class="upload-content" id="uploadContent">
+						  <div class="upload-icon"><i class="fa-regular fa-image"></i></div>
+						  <label for="photo-upload" class="upload-button">+ Ajouter photo</label>
+						  <div class="upload-text">jpg, png : 4mo max</div>
+						</div>
+					  
+						<input type="file" id="photo-upload" accept=".jpg, .jpeg, .png" />
+						<img id="preview" class="preview-img" style="display: none;" />
+						<button class="cancel-button" id="cancelBtn">Annuler</button>
+					  </div>
+					
+					<div class="form-input">
+						<label>Titre :</label>
+						<input type="text" name="title" />
+					</div>
+					
+					<div class="form-input">
+						<label>Catégorie :</label>
+						<select name="category" class="select-categories">
+							<option value=""></option>
+						</select>
+					</div>
+				</div>
+				<input type="submit" class="btn-valider" value="Valider"></input>
+			</form>
 		</div>
 	</div>
 </aside>
+<script type="module" src="main.js"></script>
 </body>
 </html>

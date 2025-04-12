@@ -1,7 +1,7 @@
 import {
     genererProjets, genererBoutonFiltres, activerFiltres, gererConnexion, 
     afficherModeEdition, afficherBoutonModifier, appelModale,genererProjetModale,
-    supprimerProjetModale
+    supprimerProjetModale, ajouterProjet, previewImage
 } from "./works.js";
 
 const reponseWorks = await fetch("http://localhost:5678/api/works");
@@ -19,6 +19,8 @@ if (token) {
     appelModale();
     genererProjetModale(works);
     supprimerProjetModale();
+    ajouterProjet();
+    previewImage();
 } else {
     genererBoutonFiltres(categories);
     activerFiltres(works);

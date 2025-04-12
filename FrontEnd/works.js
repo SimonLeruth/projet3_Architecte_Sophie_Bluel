@@ -250,3 +250,86 @@ export function supprimerProjetModale() {
         }
     }));
 }
+
+let categoriesLoaded = false;
+
+export function ajouterProjet () {
+
+    const modaleSupprimerProjet = document.querySelector(".modale-supprimer-projet");
+    const modaleAjouterProjet = document.querySelector(".form-ajout");
+    const boutonAjouterProjet = document.querySelector('.btnAjtProjet');
+    const modale = document.getElementById("modale1");
+
+    boutonAjouterProjet.addEventListener('click', async (event) => {
+        event.preventDefault();
+
+        modaleSupprimerProjet.style.display = "none";
+        modaleAjouterProjet.style.display = "block";
+
+        if(!categoriesLoaded) {
+            try {
+                const reponse = await fetch("http://localhost:5678/api/categories");
+                const categories = await reponse.json();
+                const select = modale.querySelector('.select-categories');
+
+                categories.forEach(categorie => {
+                    const option = document.createElement("option");
+                    option.value = categorie.id;
+                    option.textContent = categorie.name;
+                    select.appendChild(option);
+                });
+
+                categoriesLoaded = true;
+
+            } catch (err) {
+                console.error("Erreur lors du chargement des categories : ", err)
+            }
+        }
+
+        const boutonRetour = modale.querySelector('.modale-retour');
+        boutonRetour.addEventListener('click', () => {
+            modaleSupprimerProjet.style.display = "block";
+            modaleAjouterProjet.style.display = "none";
+        });
+
+        const boutonFermer = modale.querySelector('.form-ajout .modale-close');
+        boutonFermer.addEventListener('click', () => {
+            modale.style.display = "none";
+            modale.setAttribute("aria-hidden", true);
+            modale.removeAttribute("aria-modal");
+            document.body.style.overflow = "auto";
+            modaleSupprimerProjet.style.display = "block";
+            modaleAjouterProjet.style.display = "none";
+        });
+    });
+}
+
+export function previewImage () {
+    const input = document.getElementById('photo-upload');
+    const preview = document.getElementById('preview');
+    const content = document.getElementById('uploadContent');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    input.addEventListener('change', () => {
+        const file = input.files[0];
+        if (file && file.type.startsWith('image/')) {
+        const reader = new FileReader();
+        reader.onload = e => {
+            preview.src = e.target.result;
+            preview.style.display = 'block';
+            content.style.display = 'none';
+            cancelBtn.style.display = 'inline-block';
+        };
+        reader.readAsDataURL(file);
+        }
+    });
+
+    cancelBtn.addEventListener('click', (event) => {
+        event.preventDefault()
+        input.value = '';
+        preview.src = '';
+        preview.style.display = 'none';
+        content.style.display = 'flex';
+        cancelBtn.style.display = 'none';
+    });
+}
