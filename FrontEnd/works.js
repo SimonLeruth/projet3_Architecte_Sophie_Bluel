@@ -176,6 +176,7 @@ export function appelModale() {
         modale.removeEventListener('click', closeModale);
         modale.querySelector('.modale-close').removeEventListener('click', closeModale);
         modale.querySelector('.modale-stop').removeEventListener('click', stopPropagation);
+        resetForm();
         modale = null;
     }
 
@@ -242,7 +243,7 @@ export function supprimerProjetModale() {
                 genererProjets(nouveauxProjets);
                 
             } else {
-                alert("Erreur lors de la suppresion de l'element : ", reponse.status);
+                alert("Erreur lors de la suppression de l'element : ", reponse.status);
             }
 
         } catch (err) {
@@ -290,6 +291,7 @@ export function ajouterProjet () {
         boutonRetour.addEventListener('click', () => {
             modaleSupprimerProjet.style.display = "block";
             modaleAjouterProjet.style.display = "none";
+            resetForm();
         });
 
         const boutonFermer = modale.querySelector('.form-ajout .modale-close');
@@ -300,6 +302,7 @@ export function ajouterProjet () {
             document.body.style.overflow = "auto";
             modaleSupprimerProjet.style.display = "block";
             modaleAjouterProjet.style.display = "none";
+            resetForm();
         });
     });
 }
@@ -332,4 +335,75 @@ export function previewImage () {
         content.style.display = 'flex';
         cancelBtn.style.display = 'none';
     });
+}
+
+export function submitFormulaire () {
+
+    // On recupere le formulaire et on ajoute l'evenement de type submit
+    const form = document.querySelector(".form-ajout form");
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        // On recupere chaque donnee du formulaire.
+        const imageInput = document.getElementById('photo-upload');
+        const titleInput = form.querySelector('input[name="title"]');
+        const categorySelect = form.querySelector('select[name="category"]');
+        const erreurSubmit = form.querySelector(".erreurSubmit");
+
+        if (!imageInput.files[0] || titleInput.value === "" || !categorySelect.value) {
+            erreurSubmit.innerText = "Veuillez remplir tous les champs du formulaire.";
+            erreurSubmit.style.display = "block"
+            return;
+        } else {
+            erreurSubmit.innerText = "";
+            erreurSubmit.style.display = "none";
+        }
+
+        const formData = new FormData();
+        formData.append("image", imageInput.files[0]);
+        formData.append("title", titleInput.value);
+        formData.append("category", categorySelect.value);
+
+        try {
+            const reponse = await fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                },
+                body: formData
+            });
+
+            if(!reponse.ok) {
+                throw new Error("Erreur lors de l'ajout du projet.")
+            }
+
+            const nouvelleReponse = await fetch("http://localhost:5678/api/works");
+            const nouveauxProjets = await nouvelleReponse.json();
+
+            const galerieModale = document.querySelector('.photosGalerie');
+            const galleriePortfolio = document.querySelector('.gallery')
+            galerieModale.innerHTML = "";
+            genererProjetModale(nouveauxProjets);
+            supprimerProjetModale();
+
+            galleriePortfolio.innerHTML = "";
+            genererProjets(nouveauxProjets);
+
+            resetForm();
+            
+
+        } catch (error) {
+            console.error("Erreur : ", error);
+            alert("Une erreur est survenue lors de l'ajout du projet !");
+        }
+    });
+}
+
+function resetForm () {
+    const form = document.querySelector(".form-ajout form");
+    form.reset();
+    document.getElementById('preview').style.display = "none";
+    document.getElementById('uploadContent').style.display = "flex";
+    document.getElementById('cancelBtn').style.display = "none";
+    form.querySelector(".erreurSubmit").style.display = "none";
 }

@@ -506,6 +506,10 @@ input[type="file"] {
 	gap: 10px;
 }
 
+.erreurSubmit {
+	color: red;
+}
+
 .form-ajout input[type="submit"] {
 	display: block;
 	height: 36px;
