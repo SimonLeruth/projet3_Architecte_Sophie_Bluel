@@ -361,6 +361,7 @@ footer nav ul {
 	font-family: 'Syne';
 	color: white;
 	background-color: #1D6154;
+	border: none;
 	margin : auto ;
 	height: 36px;
 	width: 237px;
@@ -514,4 +515,11 @@ input[type="file"] {
 	display: block;
 	height: 36px;
 	width: 237px;
+	background-color: #A7A7A7;
+	border: none;
+}
+
+.divBoutonValider {
+	border-top: 1px solid #B3B3B3;
+	margin-top: 40px ;
 }
