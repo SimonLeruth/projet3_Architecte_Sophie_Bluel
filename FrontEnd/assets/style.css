@@ -334,7 +334,7 @@ footer nav ul {
 	width: 100%;
 }
 
-.modale-close {
+.icone-modale {
 	font-size: 24px;
 	text-align: right;
 	position: relative;
@@ -393,7 +393,7 @@ footer nav ul {
 	border-radius: 10px;
 }
 
-.icone-modale {
+.icones-modale {
 	display: flex;
 	justify-content: space-between;
 }
