@@ -225,6 +225,8 @@ export function appelModale() {
         modale.querySelector('.modale-stop').removeEventListener('click', stopPropagation);
         // Reinitialise le formulaire
         resetForm();
+        // Desactive le bouton quand on clique hors de la modale
+        checkFormValidity();
         // Enleve l'id dans la variable "modale"
         modale = null;
     }
@@ -378,6 +380,7 @@ export function ajouterProjet () {
             modaleSupprimerProjet.style.display = "block";
             modaleAjouterProjet.style.display = "none";
             resetForm();
+            checkFormValidity();
         });
 
         // Reprend la fonction de fermeture de la modale sur le bouton close.
@@ -390,6 +393,7 @@ export function ajouterProjet () {
             modaleSupprimerProjet.style.display = "block";
             modaleAjouterProjet.style.display = "none";
             resetForm();
+            checkFormValidity();
         });
     });
 }
@@ -426,13 +430,39 @@ export function previewImage () {
 
     // Ajout de l'evenement lors du click sur le bouton "Annuler" et remet la box ou l'image est pre-chargee a l'etat initial
     cancelBtn.addEventListener('click', (event) => {
-        event.preventDefault()
+        event.preventDefault();
         input.value = '';
         preview.src = '';
         preview.style.display = 'none';
         content.style.display = 'flex';
         cancelBtn.style.display = 'none';
     });
+}
+
+/**
+ * Fonction locale qui permet de rendre le bouton "Valider" inutilisable tant que tous les champs ne sont pas remplis
+ */
+
+function checkFormValidity() {
+
+    // Recuperation de tous les elements du DOM du formulaire
+    const imageInput = document.getElementById('photo-upload');
+    const titleInput = document.querySelector('input[name="title"]');
+    const categorySelect = document.querySelector('select[name="category"]');
+    const submitButton = document.querySelector('.btn-valider');
+
+    // Creation de trois booleens qui est true quand le champs n'est pas vide
+    const isTitleValid = titleInput.value !== '';
+    const isCategoryValid = categorySelect.value !== '';
+    const isImageValid = imageInput.files.length > 0;
+
+    // Desactivation du bouton lorsque tous les champs ne sont pas remplis
+    submitButton.disabled = !(isTitleValid && isCategoryValid && isImageValid);
+
+    // Ecoute des changements de champs
+    titleInput.addEventListener('input', checkFormValidity);
+    categorySelect.addEventListener('change', checkFormValidity);
+    imageInput.addEventListener('change', checkFormValidity);
 }
 
 /**
@@ -444,14 +474,17 @@ export function submitFormulaire () {
 
     // On recupere le formulaire et on ajoute l'evenement de type submit
     const form = document.querySelector(".form-ajout form");
+    // On recupere chaque donnee du formulaire.
+    const imageInput = document.getElementById('photo-upload');
+    const titleInput = form.querySelector('input[name="title"]');
+    const categorySelect = form.querySelector('select[name="category"]');
+    const erreurSubmit = form.querySelector(".erreurSubmit");
+
+    // Rend le bouton "Valider" inutilisable tant que tous les champs ne sont pas remplis
+    checkFormValidity();
+    
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
-
-        // On recupere chaque donnee du formulaire.
-        const imageInput = document.getElementById('photo-upload');
-        const titleInput = form.querySelector('input[name="title"]');
-        const categorySelect = form.querySelector('select[name="category"]');
-        const erreurSubmit = form.querySelector(".erreurSubmit");
 
         // Condition dans laquelle toutes les donnees du formulaire ne sont pas entrees
         if (!imageInput.files[0] || titleInput.value === "" || !categorySelect.value) {
@@ -499,6 +532,8 @@ export function submitFormulaire () {
 
             // Re-initialisation du formulaire
             resetForm();
+            // Rend le bouton "Valider" inutilisable tant que tous les champs ne sont pas remplis
+            checkFormValidity();
             
 
         } catch (error) {

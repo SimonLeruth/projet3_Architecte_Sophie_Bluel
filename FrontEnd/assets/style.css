@@ -69,6 +69,15 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+#main {
+	flex: 1;
+	min-height: 100%;
+	margin-top: 50px;
 }
 
 header {
@@ -519,9 +528,13 @@ input[type="file"] {
 	display: block;
 	height: 36px;
 	width: 237px;
-	background-color: #A7A7A7;
 	border: none;
 }
+
+.btn-valider:disabled {
+	background-color: #A7A7A7;
+	cursor: not-allowed;
+  }
 
 .divBoutonValider {
 	border-top: 1px solid #B3B3B3;

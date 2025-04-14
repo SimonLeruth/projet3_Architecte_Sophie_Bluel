@@ -15,7 +15,7 @@ const reponseWorks = await fetch("http://localhost:5678/api/works");
 const works = await reponseWorks.json();
 const reponseCategories = await fetch("http://localhost:5678/api/categories");
 const categories = await reponseCategories.json();
-const token = localStorage.getItem("token");
+const token = sessionStorage.getItem("token");
 
 genererProjets(works);
 
