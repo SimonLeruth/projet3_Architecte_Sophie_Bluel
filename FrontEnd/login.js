@@ -1,3 +1,12 @@
+/*************************************************************************************************
+ * 
+ * Ce fichier contient toutes les fonctions nécessaires au fonctionnement de la connexion au site. 
+ * 
+ *************************************************************************************************/
+
+/**
+ * Fonction qui verifie par rapport a l'API les donnees rentrees dans le formulaire de connexion
+ */
 function seConnecter () {
 
     // Recuperation du formulaire
