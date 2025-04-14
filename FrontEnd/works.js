@@ -11,19 +11,19 @@
 export async function genererProjets (projets) {
     
     // Récupération de l'élément du DOM qui accueillera les projets
-    const sectionProjet = document.querySelector(".gallery");
+    const sectionProjet = document.querySelector('.gallery');
     
     for (let i = 0 ; i < projets.length; i++) {
         const projetElement = projets[i];
 
         // Création d’une balise dédiée à un projet
-        const projet = document.createElement("article");
+        const projet = document.createElement('article');
         projet.dataset.id = projetElement.id;
 
         // Création des balises
-        const imageElement = document.createElement("img");
+        const imageElement = document.createElement('img');
         imageElement.src = projetElement.imageUrl;
-        const titleElement = document.createElement("p");
+        const titleElement = document.createElement('p');
         titleElement.innerText = projetElement.title;
 
         // Rattache la balise article a la section gallery
@@ -45,13 +45,13 @@ export async function genererProjets (projets) {
 export async function genererBoutonFiltres (categoriesFiltres) {
 
     // Récupération des deux elements du DOM pour pouvoir positionner des filtres a la bonne place sur la page.
-    const sectionPortfolio = document.querySelector("#portfolio");
-    const divGallery = document.querySelector(".gallery");
+    const sectionPortfolio = document.querySelector('#portfolio');
+    const divGallery = document.querySelector('.gallery');
 
     // Création d'un 'nav' ainsi que le 'ul' pour y mettre des 'li'.
-    const navFiltres = document.createElement("nav");
+    const navFiltres = document.createElement('nav');
     navFiltres.classList.add("filtres");
-    const ulFiltres = document.createElement("ul");
+    const ulFiltres = document.createElement('ul');
     navFiltres.appendChild(ulFiltres);
 
     // Création du bouton 'Tous' et ajout de la classe active
@@ -83,7 +83,7 @@ export async function genererBoutonFiltres (categoriesFiltres) {
 export async function activerFiltres (works) {
 
     // Recuperation de tous les boutons dans une seule variable
-    const boutonsFiltres = document.querySelectorAll(".filtres li");
+    const boutonsFiltres = document.querySelectorAll('.filtres li');
 
     // Boucle sur les boutons afin d'y ajouter un evenement de type click
     boutonsFiltres.forEach(bouton => {
@@ -106,7 +106,7 @@ export async function activerFiltres (works) {
             }
 
             // Vide la partie HTML et on refresh avec les works demandes
-            document.querySelector(".gallery").innerText = "";
+            document.querySelector('.gallery').innerText = "";
             genererProjets(projetsFiltres);
         })
     });
@@ -117,7 +117,7 @@ export async function activerFiltres (works) {
 export function gererConnexion() {
 
     // Recuperation de l'element ou doit changer le login/logout
-    const loginLink = document.getElementById("loginLink");
+    const loginLink = document.getElementById('loginLink');
 
     // Change le login -> logout et au moment du click sur ce logout on supprime 
     // le token du localStorage
@@ -134,11 +134,11 @@ export function gererConnexion() {
 export function afficherModeEdition () {
 
     // Recuperation des balises body et html
-    const body = document.querySelector("body");
-    const html = document.querySelector("html");
+    const body = document.querySelector('body');
+    const html = document.querySelector('html');
 
     // Creation de l'element div en lui ajoutant la classe topBar
-    const topBar = document.createElement("div");
+    const topBar = document.createElement('div');
     topBar.classList.add("topBar")
     // Insert l'HTML dans la balise div
     topBar.innerHTML += '<i class="fa-regular fa-pen-to-square"></i><p>Mode édition</p>';
@@ -152,8 +152,8 @@ export function afficherModeEdition () {
 export function afficherBoutonModifier () {
 
     // Recuperation des elements du DOM
-    const h2 = document.querySelector("#portfolio h2");
-    const div = document.createElement("div");
+    const h2 = document.querySelector('#portfolio h2');
+    const div = document.createElement('div');
     // Ajoute la classe edition a la div
     div.classList.add("edition");
     // Change la balise h2 en div et re-injectons le h2 a l'interieur
@@ -161,7 +161,7 @@ export function afficherBoutonModifier () {
     div.appendChild(h2);
 
     // Creation dynamique du bouton qui contiendra la classe "js-modal" et qui contiendra l'icone pour le texte "Modifier"
-    const editionBouton = document.createElement("a");
+    const editionBouton = document.createElement('a');
     editionBouton.classList.add("js-modale");
     editionBouton.setAttribute('href', "#modale1");
     editionBouton.innerHTML += '<i class="fa-regular fa-pen-to-square"></i><p>Modifier</p>';
@@ -240,7 +240,7 @@ export function appelModale() {
         event.stopPropagation();
     }
 
-    document.querySelector(".js-modale").addEventListener('click', openModale);
+    document.querySelector('.js-modale').addEventListener('click', openModale);
 
     // Ajouter la possibilite de fermer la modale avec la touche escape du clavier
     window.addEventListener('keydown', (event) => {
@@ -256,20 +256,20 @@ export function appelModale() {
  */
 
 export function genererProjetModale(works) {
-    const projetsModale= document.querySelector(".photosGalerie");
+    const projetsModale= document.querySelector('.photosGalerie');
 
     // Boucle sur tous les projets
     for (let i = 0; i < works.length; i++) {
         const projetElementModale = works[i];
 
         // Création d’une balise dédiée à un projet
-        const projetModale = document.createElement("article");
+        const projetModale = document.createElement('article');
         projetModale.dataset.id = projetElementModale.id;
 
         // Création des balises et ajout de l'icone de suppression sur les images
-        const imageElementModale = document.createElement("img");
+        const imageElementModale = document.createElement('img');
         imageElementModale.src = projetElementModale.imageUrl;
-        const lienCorbeille = document.createElement("a");
+        const lienCorbeille = document.createElement('a');
         lienCorbeille.classList.add("trash")
         lienCorbeille.innerHTML = '<i class="fa-solid fa-trash-can"></i>'
 
@@ -288,7 +288,7 @@ export function genererProjetModale(works) {
 export function supprimerProjetModale() {
 
     // Recuperation de l'icone "poubelle"
-    const boutonsSuppProjet = document.querySelectorAll(".trash");
+    const boutonsSuppProjet = document.querySelectorAll('.trash');
 
     // Boucle sur tous les projets afin de recuperer le click sur le projet voulu
     boutonsSuppProjet.forEach(bouton => bouton.addEventListener('click', async (event) => {
@@ -296,7 +296,7 @@ export function supprimerProjetModale() {
         event.preventDefault();
 
         // Recuperation de la balise article du bouton sur lequel on clique
-        const projet = bouton.closest("article");
+        const projet = bouton.closest('article');
         const projetId = projet.dataset.id;
 
         // Essai de l'envoi de la requete pour suppression dans l'API
@@ -317,7 +317,7 @@ export function supprimerProjetModale() {
                 // Re-actualise le DOM en fonction de la nouvelle API
                 const nouvelleReponse = await fetch("http://localhost:5678/api/works");
                 const nouveauxProjets = await nouvelleReponse.json();
-                document.querySelector(".gallery").innerHTML = "";
+                document.querySelector('.gallery').innerHTML = "";
                 genererProjets(nouveauxProjets);
                 
             } else {
@@ -339,8 +339,8 @@ let categoriesLoaded = false;
 export function ajouterProjet () {
 
     // Reprend toutes les elements du DOM necessaire tels que la premiere modale la deuxieme modale, le bouton qui remplace l'affiche des modales
-    const modaleSupprimerProjet = document.querySelector(".modale-supprimer-projet");
-    const modaleAjouterProjet = document.querySelector(".form-ajout");
+    const modaleSupprimerProjet = document.querySelector('.modale-supprimer-projet');
+    const modaleAjouterProjet = document.querySelector('.form-ajout');
     const boutonAjouterProjet = document.querySelector('.btnAjtProjet');
     const modale = document.getElementById("modale1");
 
@@ -361,7 +361,7 @@ export function ajouterProjet () {
                 const select = modale.querySelector('.select-categories');
 
                 categories.forEach(categorie => {
-                    const option = document.createElement("option");
+                    const option = document.createElement('option');
                     option.value = categorie.id;
                     option.textContent = categorie.name;
                     select.appendChild(option);
@@ -387,8 +387,8 @@ export function ajouterProjet () {
         const boutonFermer = modale.querySelector('.form-ajout .modale-close');
         boutonFermer.addEventListener('click', () => {
             modale.style.display = "none";
-            modale.setAttribute("aria-hidden", true);
-            modale.removeAttribute("aria-modal");
+            modale.setAttribute('aria-hidden', true);
+            modale.removeAttribute('aria-modal');
             document.body.style.overflow = "auto";
             modaleSupprimerProjet.style.display = "block";
             modaleAjouterProjet.style.display = "none";
@@ -420,9 +420,9 @@ export function previewImage () {
             // Lorsque le fichier est charge alors change les attributs des elements du DOM qui sont necessaires et affiche le bouton d'annulation
             reader.onload = e => {
                 preview.src = e.target.result;
-                preview.style.display = 'block';
-                content.style.display = 'none';
-                cancelBtn.style.display = 'inline-block';
+                preview.style.display = "block";
+                content.style.display = "none";
+                cancelBtn.style.display = "inline-block";
         };
         reader.readAsDataURL(file);
         }
@@ -431,11 +431,11 @@ export function previewImage () {
     // Ajout de l'evenement lors du click sur le bouton "Annuler" et remet la box ou l'image est pre-chargee a l'etat initial
     cancelBtn.addEventListener('click', (event) => {
         event.preventDefault();
-        input.value = '';
-        preview.src = '';
-        preview.style.display = 'none';
-        content.style.display = 'flex';
-        cancelBtn.style.display = 'none';
+        input.value = "";
+        preview.src = "";
+        preview.style.display = "none";
+        content.style.display = "flex";
+        cancelBtn.style.display = "none";
     });
 }
 
@@ -473,12 +473,12 @@ function checkFormValidity() {
 export function submitFormulaire () {
 
     // On recupere le formulaire et on ajoute l'evenement de type submit
-    const form = document.querySelector(".form-ajout form");
+    const form = document.querySelector('.form-ajout form');
     // On recupere chaque donnee du formulaire.
     const imageInput = document.getElementById('photo-upload');
     const titleInput = form.querySelector('input[name="title"]');
     const categorySelect = form.querySelector('select[name="category"]');
-    const erreurSubmit = form.querySelector(".erreurSubmit");
+    const erreurSubmit = form.querySelector('.erreurSubmit');
 
     // Rend le bouton "Valider" inutilisable tant que tous les champs ne sont pas remplis
     checkFormValidity();
@@ -505,9 +505,9 @@ export function submitFormulaire () {
         // Essai de l'envoi de l'objet a l'API
         try {
             const reponse = await fetch("http://localhost:5678/api/works", {
-                method: "POST",
+                method: 'POST',
                 headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("token")}`
+                    'Authorization': `Bearer ${localStorage.getItem("token")}`
                 },
                 body: formData
             });
@@ -548,12 +548,12 @@ export function submitFormulaire () {
  */
 function resetForm () {
     // Recuperation du formulaire
-    const form = document.querySelector(".form-ajout form");
+    const form = document.querySelector('.form-ajout form');
     // Fonction qui remet par defaut les champs de formulaire a zero
     form.reset();
     // Re-initialise la box de previsualisation
     document.getElementById('preview').style.display = "none";
     document.getElementById('uploadContent').style.display = "flex";
     document.getElementById('cancelBtn').style.display = "none";
-    form.querySelector(".erreurSubmit").style.display = "none";
+    form.querySelector('.erreurSubmit').style.display = "none";
 }

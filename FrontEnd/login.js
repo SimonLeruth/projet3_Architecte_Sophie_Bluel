@@ -10,7 +10,7 @@
 function seConnecter () {
 
     // Recuperation du formulaire
-    const form = document.querySelector(".formSeConnecter");
+    const form = document.querySelector('.formSeConnecter');
 
     // Ajout de l'evenement submit.
     form.addEventListener('submit', async (event) => {
@@ -19,10 +19,10 @@ function seConnecter () {
         event.preventDefault();
 
         // on stocke dans des constantes les besoins pour faire appel a l'API
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("passwd").value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('passwd').value;
         const idConnexion = {email: email, password: password};
-        const errorMessage = document.querySelector(".erreur-message");
+        const errorMessage = document.querySelector('.erreur-message');
 
         // On envoie les donnees du formulaire a l'API qui nous renvoie un fichier JSON
         const reponse = await fetch('http://localhost:5678/api/users/login', {
