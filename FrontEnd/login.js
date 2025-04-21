@@ -44,7 +44,7 @@ function seConnecter () {
         // On stocke dans une variable le fichier JSON transforme en objet et ajoute le token re-envoye par l'API au localStorage. 
         // Ensuite nous redirigeons la connexion sur la page index.html
         const data = await reponse.json();
-        sessionStorage.setItem("token", data.token);
+        localStorage.setItem("token", data.token);
         window.location.href = "index.html";
     })
 }
